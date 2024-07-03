@@ -5,7 +5,7 @@ class Solution:
            remaining = target - nums[i] 
            
            if remaining in array: 
-               return [i, array[remaining]]  
+               return [array[remaining], i]  
            else:
                array[value] = i 
     
