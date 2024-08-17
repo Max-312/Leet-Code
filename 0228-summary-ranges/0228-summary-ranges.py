@@ -1,14 +1,23 @@
 class Solution:
-    def summaryRanges(self, nums: List[int]) -> List[str]:
-        storage = []
-        for i in nums:
-            if i-1 not in nums:
-                left = i
-                gap = 1
-                while left + gap in nums:  
-                    gap += 1
-                if gap > 1:
-                    storage.append(f"{i}->{left + gap - 1}")
+    def summaryRanges(self, nums):
+        if not nums:
+            return []
+
+        ranges = []
+        start = nums[0]
+
+        for i in range(1, len(nums)):
+            if nums[i] != nums[i-1] + 1:
+                if start == nums[i-1]:
+                    ranges.append(str(start))
                 else:
-                    storage.append(str(i))
-        return storage
+                    ranges.append(str(start) + "->" + str(nums[i-1]))
+                start = nums[i]
+
+
+        if start == nums[-1]:
+            ranges.append(str(start))
+        else:
+            ranges.append(str(start) + "->" + str(nums[-1]))
+
+        return ranges
